@@ -50,9 +50,6 @@ class AddNewTask extends StatelessWidget {
             ),
             Row(
               children: <Widget>[
-                SizedBox(
-                  width: 10,
-                ),
                 GestureDetector(
                   onTap: () {
                     dbProvider.selecteType(0);
@@ -60,11 +57,12 @@ class AddNewTask extends StatelessWidget {
                   child: TypeTask(
                     color: Color(0xffffd506),
                     type: 'Personal',
+                    isSelecte: dbProvider.isPersonal,
                   ),
                 ),
-                SizedBox(
-                  width: 10,
-                ),
+                // SizedBox(
+                //   width: 5,
+                // ),
                 GestureDetector(
                   onTap: () {
                     dbProvider.selecteType(1);
@@ -72,11 +70,12 @@ class AddNewTask extends StatelessWidget {
                   child: TypeTask(
                     color: Color(0xff5de61a),
                     type: 'Work',
+                    isSelecte: dbProvider.isWork,
                   ),
                 ),
-                SizedBox(
-                  width: 10,
-                ),
+                // SizedBox(
+                //   width: 5,
+                // ),
                 GestureDetector(
                   onTap: () {
                     dbProvider.selecteType(2);
@@ -84,30 +83,33 @@ class AddNewTask extends StatelessWidget {
                   child: TypeTask(
                     color: Color(0xffd10263),
                     type: 'Meeting',
+                    isSelecte: dbProvider.isMeeting,
                   ),
                 ),
                 SizedBox(
-                  width: 10,
+                  width: 5,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    dbProvider.selecteType(5);
+                  },
+                  child: TypeTask(
+                    color: Color(0xff3044f2),
+                    type: 'Study',
+                    isSelecte: dbProvider.isStudy,
+                  ),
+                ),
+                SizedBox(
+                  width: 5,
                 ),
                 GestureDetector(
                   onTap: () {
                     dbProvider.selecteType(3);
                   },
                   child: TypeTask(
-                    color: Color(0xff3044f2),
-                    type: 'Study',
-                  ),
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    dbProvider.selecteType(4);
-                  },
-                  child: TypeTask(
                     color: Color(0xfff29130),
                     type: 'Shopping',
+                    isSelecte: dbProvider.isShopping,
                   ),
                 ),
               ],
@@ -158,14 +160,22 @@ class AddNewTask extends StatelessWidget {
                       ),
                     )),
               ),
+
+              // dbProvider.time == null
+              //           ? ''
+              //           : "${dbProvider.time.hour.toString()}" +
+              //               ":"
+              //                   "${dbProvider.time.minute.toString()}"
               onTap: () {
                 Tasks tasks = Tasks(
                     isComplete: false,
                     date: dbProvider.time == null
                         ? ''
-                        : "${dbProvider.time.hour.toString()}" +
+                        : "${dbProvider.time.day.toString()}" +
                             ":"
-                                "${dbProvider.time.minute.toString()}",
+                                "${dbProvider.time.month.toString()}"
+                                ':'
+                                "${dbProvider.time.year.toString()}",
                     type: dbProvider.type,
                     title: _titleController.text);
 

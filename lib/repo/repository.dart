@@ -19,6 +19,15 @@ class DbRepository {
     return tasks;
   }
 
+  Future<List<Tasks>> getTasksByNameWithLike(String title) async {
+    List<Map<String, dynamic>> result =
+        await DbCilent.dbClient.getTasksByNameWithLike(title);
+
+    List<Tasks> tasks = result.map((e) => Tasks.fromJson(e)).toList();
+
+    return tasks;
+  }
+
   Future<List<Tasks>> getTaskByType(String type) async {
     List<Map<String, dynamic>> result =
         await DbCilent.dbClient.getTaskByType(type);
@@ -39,6 +48,4 @@ class DbRepository {
   updateTasksById(int id, Tasks tasks) async {
     await DbCilent.dbClient.updateTasksById(id, tasks.toJson());
   }
-
-  
 }

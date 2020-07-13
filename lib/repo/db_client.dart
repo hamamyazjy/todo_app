@@ -83,6 +83,24 @@ class DbCilent {
     }
   }
 
+  Future<List<Map<String, dynamic>>> getTasksByNameWithLike(Pattern p) async {
+    try {
+      database = await initDb();
+
+      // List<Map<String, dynamic>> result = await database.rawQuery('''
+      // SELECT *
+      //     FROM $studentTableName
+      //            WHERE $studentNameColum LIKE '$p%' ''');
+
+      List<Map<String, dynamic>> result = await database.query(studentTableName,
+          where: '$studentTitleColum LIKE  ?', whereArgs: [p]);
+
+      return result;
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
   deleteAllTasks() async {
     database = await initDb();
     int x = await database.delete(studentTableName);

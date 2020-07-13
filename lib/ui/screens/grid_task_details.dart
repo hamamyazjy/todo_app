@@ -11,6 +11,9 @@ class GridTaskDetails extends StatelessWidget {
     DbProvider dbProvider = Provider.of(context);
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text(' Tasks ${dbProvider.type}'),
+      ),
       body: FutureBuilder<List<Tasks>>(
           future: dbProvider.setTaskByType(dbProvider.type),
           builder: (context, AsyncSnapshot asyncSnapshot) {

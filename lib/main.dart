@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider<DbProvider>(
       create: (context) => DbProvider(),
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         home: OnBoarding(),
       ),
     );

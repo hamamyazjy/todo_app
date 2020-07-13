@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:todo_app/models/tasks.dart';
 import 'package:todo_app/repo/repository.dart';
 
 class DbProvider extends ChangeNotifier {
   List<Tasks> tasks = [];
-  TimeOfDay time = TimeOfDay(hour: 0, minute: 00);
+  DateTime time = DateTime(2009);
   String type;
 
   bool isPersonal = false;
@@ -48,21 +49,12 @@ class DbProvider extends ChangeNotifier {
         isPersonal = false;
         isWork = false;
         isMeeting = false;
-        isStudy = true;
-        isShopping = false;
-        isParty = false;
-        type = 'Study';
-        break;
-      case 4:
-        isPersonal = false;
-        isWork = false;
-        isMeeting = false;
         isStudy = false;
         isShopping = true;
         isParty = false;
         type = 'Shopping';
         break;
-      case 5:
+      case 4:
         isPersonal = false;
         isWork = false;
         isMeeting = false;
@@ -71,20 +63,31 @@ class DbProvider extends ChangeNotifier {
         isParty = true;
         type = 'Party';
         break;
+      case 5:
+        isPersonal = false;
+        isWork = false;
+        isMeeting = false;
+        isStudy = true;
+        isShopping = false;
+        isParty = false;
+        type = 'Study';
+        break;
       default:
     }
     notifyListeners();
   }
 
-  Future<TimeOfDay> selectTime(BuildContext context) async {
-    final TimeOfDay picked = await showTimePicker(
-      context: context,
-      initialTime: time,
-    );
-    if (picked != null && picked != time) {
-      time = picked;
-    }
-    return picked;
+  selectTime(BuildContext context) async {
+    DatePicker.showDatePicker(context,
+        showTitleActions: true,
+        minTime: DateTime(2020, 3, 5),
+        maxTime: DateTime(2030, 6, 7), onChanged: (date) {
+      time = date;
+      notifyListeners();
+    }, onConfirm: (date) {
+      time = date;
+      notifyListeners();
+    }, currentTime: DateTime.now(), locale: LocaleType.en);
   }
 
   Future<List<Tasks>> setAllTasks() async {
@@ -97,6 +100,12 @@ class DbProvider extends ChangeNotifier {
     tasks = await DbRepository.dbRepository.getTaskByType(type);
     setAllTasks();
     // notifyListeners();
+    return tasks;
+  }
+
+  Future<List<Tasks>> setTasksByNameWithLike(Pattern type) async {
+    tasks = await DbRepository.dbRepository.getTasksByNameWithLike(type);
+    setAllTasks();
     return tasks;
   }
 

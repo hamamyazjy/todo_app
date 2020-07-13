@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:todo_app/models/tasks.dart';
 import 'package:todo_app/provider/db_provider.dart';
 import 'package:todo_app/ui/screens/home_task.dart';
+import 'package:todo_app/ui/screens/search.dart';
 import 'package:todo_app/ui/widgets/add_new_task.dart';
 
 import 'grid_task.dart';
@@ -22,6 +23,24 @@ class _HomeState extends State<Home> {
 
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            "ToDo",
+            style: TextStyle(
+              fontWeight: FontWeight.w700,
+              fontSize: 20,
+              color: Color(0xffffffff),
+            ),
+          ),
+          actions: <Widget>[
+            IconButton(
+                icon: Icon(Icons.search),
+                onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => Search())))
+          ],
+        ),
         body: FutureBuilder<List<Tasks>>(
             future: dbProvider.setAllTasks(),
             builder: (context, AsyncSnapshot asyncSnapshot) {

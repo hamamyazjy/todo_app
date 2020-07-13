@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:todo_app/models/item_tasks.dart';
 
 class ItemsGridView extends StatelessWidget {
-  // bool isComplete = false;
-  // String title;
-  // ItemsGridView({this.isComplete, this.title});
   ItemTask itemsTask;
 
   ItemsGridView({this.itemsTask});
