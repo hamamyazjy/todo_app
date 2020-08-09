@@ -3,6 +3,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/models/tasks.dart';
 import 'package:todo_app/provider/db_provider.dart';
+import 'package:todo_app/repo/repository.dart';
 import 'package:todo_app/ui/widgets/item_list_view.dart';
 
 class Search extends StatelessWidget {
@@ -23,8 +24,8 @@ class Search extends StatelessWidget {
               // controller: _searchController,
               onChanged: (value) async {
                 search = value;
-                // await dbHelper
-                //     .setTasksByNameWithLike(search == '' ? '' : '$search%');
+                await dbProvider
+                    .setTasksByNameWithLike(search == '' ? '' : '$search%');
               },
               decoration: InputDecoration(
                   labelText: 'Search',

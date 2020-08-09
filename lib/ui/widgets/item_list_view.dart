@@ -100,7 +100,7 @@ class ItemsListView extends StatelessWidget {
                 decoration: isComplete
                     ? TextDecoration.lineThrough
                     : TextDecoration.none,
-                fontSize: 14,
+                fontSize: 19,
                 color: isComplete ? Colors.grey : Color(0xff554e8f),
               ),
             )

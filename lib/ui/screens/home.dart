@@ -52,7 +52,7 @@ class _HomeState extends State<Home> {
             }),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Navigator.push(
+            Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
                     builder: (BuildContext context) => AddNewTask()));

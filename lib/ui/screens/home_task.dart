@@ -47,6 +47,7 @@ class HomeTask extends StatelessWidget {
                                     onPressed: () {
                                       dbProvider.deleteTasksById(
                                           dbProvider.tasks[index].id);
+                                      Navigator.pop(context);
                                     },
                                     child: Text('Yes')),
                                 FlatButton(
@@ -63,7 +64,31 @@ class HomeTask extends StatelessWidget {
               );
             });
       } else {
-        return Center(child: Text('Prees + to add New Task'));
+        return Center(
+            child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            SizedBox(
+              width: 200,
+              height: 200,
+              child: Image.asset('assets/images/noTask.png'),
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            Text(
+              'No tasks',
+              style: TextStyle(fontSize: 20, color: Color(0xff554e8f)),
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            Text(
+              'Prees + to add New Task',
+              style: TextStyle(fontSize: 15),
+            ),
+          ],
+        ));
       }
     });
   }

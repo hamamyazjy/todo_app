@@ -53,13 +53,13 @@ class ItemsGridView extends StatelessWidget {
           SizedBox(
             height: 10,
           ),
-          Text(
-            "${itemsTask.numberTotal} Task",
-            style: TextStyle(
-              fontSize: 8,
-              color: Color(0xffa1a1a1),
-            ),
-          )
+          // Text(
+          //   "${itemsTask.numberTotal} Task",
+          //   style: TextStyle(
+          //     fontSize: 8,
+          //     color: Color(0xffa1a1a1),
+          //   ),
+          // )
         ],
       ),
     ));
